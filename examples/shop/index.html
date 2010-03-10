@@ -161,6 +161,7 @@
           a.appendChild(new Element("img", { border: "0", src: product.images[0].image_160x120 }));
           li.appendChild(a);
           li.appendChild(new Element("span").update(product.name.truncate(25)));
+          li.appendChild(new Element("div", {style: "clear: both"}));
           li.appendChild(new Element("span").update(product.user.name.truncate(20)));
           li.appendChild(new Element("span", {style: "float: right"}).update(toPrice(product.price)));
           $("products").appendChild(li);

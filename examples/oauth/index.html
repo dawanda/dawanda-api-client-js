@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>OAuth example</title>
+    <script type="text/javascript" charset="utf-8" src="../../lib/v1/lib/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../lib/v1/src/dawanda.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        var oauthApi = new DaWanda.API.OAuth("8rvQGF1FmiKrqVCzuIm7", "1FOkxxaCKF8xt6RXEt4yNJrhz1lSDx6FrplRQksO", "de")
+        console.log(oauthApi)
+        oauthApi.requestAuthorization()
+      })
+    </script>
+  </head>
+  <body>
+  
+  </body>
+</html>

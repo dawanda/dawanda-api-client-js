@@ -3,15 +3,63 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>OAuth example</title>
     <script type="text/javascript" charset="utf-8" src="../../lib/v1/lib/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../lib/v1/src/dawanda.js"></script>
-    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
-    <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+    <script type="text/javascript" src="../../lib/v1/lib/jsOAuth-0.7.4.3.min.js"></script>
+    
     <script type="text/javascript" charset="utf-8">
-      $(document).ready(function() {
-        var oauthApi = new DaWanda.API.OAuth("8rvQGF1FmiKrqVCzuIm7", "1FOkxxaCKF8xt6RXEt4yNJrhz1lSDx6FrplRQksO", "de")
-        console.log(oauthApi)
-        oauthApi.requestAuthorization()
-      })
+      function hasTokenInUrl() {
+        return (window.location.href.indexOf('oauth_token') > -1)
+      }
+      
+      function getTokenFromUrl() {
+        return window.location.href.split('?')[1]
+      }
+      
+      function cleanUrl() {
+        return window.location.href.split('?')[0]
+      }
+      
+      function getAccessToken() {
+        if (!hasTokenInUrl()) {
+          
+          oauth.get(oauth.requestTokenUrl, function (requestToken) {
+            window.location.href = oauth.authorizationUrl + "?" + requestToken.text
+          });
+          
+        } else {
+          requestToken = getTokenFromUrl()
+          
+          oauth.get(oauth.accessTokenUrl + "?" + requestToken, function (data) {
+            var accessToken = data.text
+            sessionStorage.setItem('accessToken', accessToken);
+            
+            console.log("sessionStorage.getItem('accessToken') => " + sessionStorage.getItem('accessToken'))
+            // redirect
+            window.location.href = cleanUrl()
+          });
+        }
+      }
+      
+      var oauth = OAuth({
+          enablePrivilege: true,
+          consumerKey: 'gN9pIo6KbEleQlQ7a2hO',
+          consumerSecret: 'C74mwrGHgpEUKXrj0wRvyAsZZNRLU6MiQ0gX5fxN',
+          
+          requestTokenUrl: 'http://de.devanda.com/oauth/request_token',
+          authorizationUrl: 'http://de.devanda.com/oauth/authorize',
+          accessTokenUrl: 'http://de.devanda.com/oauth/access_token',
+      });
+
+      // authorize by user
+      if (!sessionStorage.getItem('accessToken')) {
+        getAccessToken()
+      } else { // has acces token
+        var accessToken = sessionStorage.getItem('accessToken')
+        
+        //get date
+        oauth.get("http://de.devanda.com/api/v1/oauth/orders.xml?" + accessToken, function (data) {
+          console.log(data)
+        });
+      }
     </script>
   </head>
   <body>

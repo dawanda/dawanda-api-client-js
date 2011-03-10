@@ -152,7 +152,7 @@
         jQuery.each(data.result.products, function(){
           var li = jQuery("<li>");
           var a = jQuery("<a>").attr("href", api.host + "/product/" + this.id).attr("target", "_blank");
-          a.append(jQuery("<img>").attr("border", "0").attr("src", this.images[0].image_160x120))
+          a.append(jQuery("<img>").attr("border", "0").attr("src", this.default_image.listview))
           
           li.append(a)
             .append(jQuery("<span>" + truncate(this.name, 25) + "</span>"))

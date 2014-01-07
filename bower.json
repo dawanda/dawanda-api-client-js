@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "lib/v1/dawanda.js",
   "description": "Client for the DaWanda API in JavaScript",
-  "license": "Eclipse",
+  "license": "MIT",
   "dependencies": {
     "jquery": "~>1.4"
   },

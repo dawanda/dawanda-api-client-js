@@ -1,0 +1,14 @@
+{
+  "name": "dawanda/dawanda-api-client-js",
+  "version": "1.0.0",
+  "main": "lib/v1/dawanda.js",
+  "description": "Client for the DaWanda API in JavaScript",
+  "license": "Eclipse",
+  "dependencies": {
+    "jquery": "~>1.4"
+  },
+  "ignore": [
+    ".git",
+    "README.md"
+  ]
+}
